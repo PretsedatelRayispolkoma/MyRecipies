@@ -1,0 +1,75 @@
+﻿<Page x:Class="MyRecipies.Pages.ComponentsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:MyRecipies.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="ComponentsPage">
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="70*"/>
+            <RowDefinition Height="10*"/>
+        </Grid.RowDefinitions>
+        <Label Content="Список ингредиентов" Grid.Row="0" FontSize="30"/>
+        <TextBlock x:Name="CountOfIngreds" Grid.Row="1" FontSize="15"/>
+        <DataGrid x:Name="IngredsLv" Grid.Row="2"  AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Наименование ингредиента" Binding="{Binding Name}" Width="30*"/>
+                <DataGridTextColumn Header="Цена" Binding="{Binding Cost}" Width="20*"/>
+                <DataGridTemplateColumn Header="В наличии" Width="20*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="{Binding AvailableCount}" Grid.Column="0"/>
+                                <TextBlock Text="{Binding Unit.Name}" Grid.Column="1"/>
+                            </Grid>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Действия" Width="30*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Button x:Name="UpdateBtn" Content="Редактировать" Grid.Row="0"/>
+                                <Button x:Name="RemoveBtn" Content="Удалить" Grid.Row="1"/>
+                            </Grid>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0" Grid.ColumnSpan="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Button x:Name="BackBtn" Content="&lt;" Width="20" Height="20" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="0" Click="BackBtn_Click"/>
+                <TextBlock x:Name="CountOfPageTb" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Button x:Name="ForwardBtn" Content="&gt;" Width="20" Height="20" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="2" Click="ForwardBtn_Click"/>
+            </Grid>
+            <Button x:Name="AddIngredBtn" Grid.Column="4" Content="+" Width="30" Height="30" Click="AddIngredBtn_Click"/>
+        </Grid>
+    </Grid>
+</Page>
